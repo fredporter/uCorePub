@@ -1,0 +1,17 @@
+[build-system]
+requires = ["setuptools>=42", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "udos-publishing"
+version = "0.1.0"
+description = "Publishing contract and related utilities"
+authors = [{name = "", email = ""}]
+readme = "README.md"
+license = {text = "MIT"}
+requires-python = ">=3.8"
+dependencies = []
+
+[project.urls]
+"Homepage" = "https://example.com/udos-publishing"
+"Bug Tracker" = "https://github.com/example/udos-publishing/issues"

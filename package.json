@@ -1,0 +1,12 @@
+{
+  "name": "udos-publishing",
+  "version": "0.1.0",
+  "description": "Publishing contract and related utilities",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "echo \"No tests yet\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT"
+}
