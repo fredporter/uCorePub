@@ -1,0 +1,9 @@
+{
+  "id": "udos-publishing",
+  "name": "uDOS Publishing",
+  "kind": "plugin",
+  "version": "0.1.0",
+  "description": "Publishing cloud mirror plugin for udo.guide and udo.place contracts",
+  "optional": true,
+  "api_prefix": "/api/publishing"
+}
