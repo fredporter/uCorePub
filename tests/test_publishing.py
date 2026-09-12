@@ -45,5 +45,33 @@ class TestPublishingStore(unittest.TestCase):
             )
 
 
+class TestEditionCompiler(unittest.TestCase):
+    def test_compile_edition_to_static_bundle(self):
+        from udos_publishing.src.compiler import compile_edition_to_static
+
+        raw_md = (
+            "---\nauthor: private_author\n---\n"
+            "# System Architecture\n\n"
+            "<!-- section: REQ-001 -->\n"
+            "This describes verified architecture [SRC-1].\n"
+        )
+        with TemporaryDirectory(prefix="udos-edition-tests-") as tmp_dir:
+            out_dir = Path(tmp_dir) / "output"
+            receipt = compile_edition_to_static(
+                edition_markdown=raw_md,
+                title="System Architecture",
+                edition_num=1,
+                output_dir=out_dir,
+            )
+            self.assertTrue(receipt["sanitized"])
+            self.assertEqual(receipt["edition"], 1)
+            self.assertTrue((out_dir / "index.html").is_file())
+            self.assertTrue((out_dir / "edition_1.clean.md").is_file())
+            clean_text = (out_dir / "edition_1.clean.md").read_text()
+            self.assertNotIn("<!-- section:", clean_text)
+            self.assertNotIn("author: private_author", clean_text)
+            self.assertIn("[SRC-1]", clean_text)
+
+
 if __name__ == '__main__':
     unittest.main()
