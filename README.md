@@ -4,13 +4,15 @@ Publishing contract and related utilities for the uCore ecosystem.
 
 This repository owns the publishing cloud mirror boundary for `udo.guide` and `udo.place`.
 
-It implements the publishing functionality including:
+## Capabilities
 
-- Story creation with privacy and expiry semantics
-- API endpoints for managing publishing content
-- Publishing-specific store implementations
-- Guide/place mirror contract and health surface
-- Test coverage for contract compliance
+`udos-publishing` provides the outbound edition compilation and multi-target publishing pipeline:
+
+- **Clean Edition Compiler:** Compiles vaults and notebook binders into sanitized, publication-ready editions. Strips internal tags, local filesystem paths, and private author frontmatter while preserving citations and evidence chains.
+- **Static Export Engines:** Exports clean editions to Quartz, Jekyll, and portable Markdown libraries for offline distribution.
+- **Headless WordPress Commercial Cloud Arm:** Outbound publishing adapter pushing clean editions to hosted WordPress / WordPress Multisite environments via the WordPress REST API (creating posts, pages, categories, tags, and media attachments).
+- **Sovereign Mirror Contracts:** Guide and place mirror boundaries for `udo.guide` and `udo.place`.
+- **Privacy & Expiry Semantics:** Enforces public vs shared vs private access controls and expiration dates before any document leaves the local environment.
 
 ## Repository Structure
 
