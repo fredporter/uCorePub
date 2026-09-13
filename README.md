@@ -1,12 +1,12 @@
-# udos-publishing
+# uCore-Publish
 
-Publishing contract and related utilities for the uCore ecosystem.
+Publishing contract, clean edition compilation, and related utilities for the uCore/uDOS ecosystem.
 
-This repository owns the publishing cloud mirror boundary for `udo.guide` and `udo.place`.
+This repository owns clean edition static compilation, offline vault export, and the publishing cloud mirror boundary for `udo.guide` and `udo.place`.
 
 ## Capabilities
 
-`udos-publishing` provides the outbound edition compilation and multi-target publishing pipeline:
+`uCore-Publish` provides the outbound edition compilation and multi-target publishing pipeline:
 
 - **Clean Edition Compiler:** Compiles vaults and notebook binders into sanitized, publication-ready editions. Strips internal tags, local filesystem paths, and private author frontmatter while preserving citations and evidence chains.
 - **Static Export Engines:** Exports clean editions to Quartz, Jekyll, and portable Markdown libraries for offline distribution.

@@ -1,7 +1,7 @@
 {
-  "name": "udos-publishing",
-  "version": "0.1.0",
-  "description": "Publishing contract and related utilities",
+  "name": "ucore-publish",
+  "version": "0.2.0",
+  "description": "Clean edition compilation, offline static export, and multi-target publishing",
   "main": "dist/index.js",
   "scripts": {
     "test": "echo \"No tests yet\""
