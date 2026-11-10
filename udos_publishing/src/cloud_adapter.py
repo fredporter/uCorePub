@@ -51,8 +51,9 @@ class WordPressCloudAdapter:
             }
         return {
             "status": "configured",
-            "mode": "live",
-            "ready": True,
+            "mode": "scaffolded",
+            "ready": False,
+            "message": "Remote publishing transport is not implemented.",
             "cloud_host": self.endpoint,
             "multisite_id": self.multisite_id or "default",
         }
@@ -78,10 +79,11 @@ class WordPressCloudAdapter:
                     "tags": tags or [],
                 },
             }
-        # When live credentials exist, outbound HTTP POST wp-json/wp/v2/posts will be made.
+        # Credentials alone do not establish delivery; no transport exists yet.
         return {
-            "success": True,
-            "mode": "live",
-            "remote_id": 1001,
+            "success": False,
+            "mode": "scaffolded",
+            "error": "remote_publishing_unavailable",
+            "message": "Remote publishing transport is not implemented; no post was sent.",
             "endpoint": f"{self.endpoint}/wp-json/wp/v2/posts",
         }

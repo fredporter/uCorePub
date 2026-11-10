@@ -21,7 +21,7 @@ class TestWordPressCloudAdapter(unittest.TestCase):
         self.assertEqual("scaffolded", result["mode"])
         self.assertEqual("Hello uDos", result["post"]["title"])
 
-    def test_configured_adapter_reports_live(self):
+    def test_configured_adapter_remains_unavailable(self):
         adapter = WordPressCloudAdapter(
             endpoint="https://cloud.udos.invalid",
             username="publisher",
@@ -30,8 +30,12 @@ class TestWordPressCloudAdapter(unittest.TestCase):
         self.assertTrue(adapter.is_configured)
         status = adapter.get_status()
         self.assertEqual("configured", status["status"])
-        self.assertEqual("live", status["mode"])
-        self.assertTrue(status["ready"])
+        self.assertEqual("scaffolded", status["mode"])
+        self.assertFalse(status["ready"])
+        result = adapter.publish_post_remote(title="Hello", content="Body")
+        self.assertFalse(result["success"])
+        self.assertEqual("remote_publishing_unavailable", result["error"])
+        self.assertNotIn("remote_id", result)
 
 
 if __name__ == "__main__":
