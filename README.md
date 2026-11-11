@@ -11,7 +11,7 @@ This repository owns clean edition static compilation, offline vault export, and
 - **Clean Edition Compiler:** Compiles vaults and notebook binders into sanitized, publication-ready editions. Strips internal tags, local filesystem paths, and private author frontmatter while preserving citations and evidence chains.
 - **Static Export Engines:** Exports clean editions to Quartz, Jekyll, and portable Markdown libraries for offline distribution.
 - **Headless WordPress Commercial Cloud Arm:** Opt-in Python adapter that sends reviewed posts to a selected HTTPS WordPress site and checks the returned post ID and status. Callers select existing categories and tags by ID.
-- **Sovereign Mirror Contracts:** Guide and place mirror boundaries for `udo.guide` and `udo.place`.
+- **Sovereign Mirror Contracts:** `udo.guide` is the canonical edition host. `udo.place` mirrors the same approved editions and adds a spatial index. Both use the same edition identity and approved link manifest. Graphics are served from `cdn.udo.guide`.
 - **Privacy & Expiry Semantics:** Enforces public vs shared vs private access controls and expiration dates before any document leaves the local environment.
 
 ## Repository Structure

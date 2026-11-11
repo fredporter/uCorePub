@@ -9,6 +9,9 @@ from pathlib import Path
 from typing import Any, Dict, List, Optional
 
 
+from .contracts import default_mirror_contract
+
+
 class PublishingStoryStore:
     """Store for publishing stories with privacy and expiry semantics."""
 
@@ -52,6 +55,7 @@ class PublishingStoryStore:
 
         story_id = f"story_{uuid.uuid4().hex}"
         now = int(time.time())
+        domains = default_mirror_contract()
         story = {
             "id": story_id,
             "title": title,
@@ -63,8 +67,9 @@ class PublishingStoryStore:
             "allow_list": list(allow_list or []),
             "view_count": 0,
             "mirror": {
-                "guide": "udo.guide",
-                "place": "udo.place",
+                "guide": domains.guide_name,
+                "place": domains.place_name,
+                "assets": domains.asset_name,
             },
             "privacy_settings": {
                 "allow_commenting": True,

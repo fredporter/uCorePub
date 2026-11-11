@@ -1,0 +1,32 @@
+[
+  {
+    "slug": "global-knowledge-sovereign-host",
+    "title": "Global Knowledge: the sovereign host",
+    "html": "<p>The device running uDOS supplies its time and timezone. Set them through the host operating system. A location lookup is a separate operation that may require permission or a verified offline reference pack.</p><h2>Example</h2><p>When travelling, update the host timezone. If a map has no verified location fix, show that location is unavailable and let the user choose a known reference.</p><h2>Source</h2><p>Global Knowledge, Sovereign Host Reference. See also <a href=\"../../udos-docs-and-specs/1/\">uDOS docs and specs</a>.</p>"
+  },
+  {
+    "slug": "user-template-project-binder",
+    "title": "User template: project Binder",
+    "html": "<p>Copy this starter into a Binder and fill in the bracketed fields.</p><pre><code># [Project name]\n## Mission\n[What do we want to achieve?]\n## Owner and review date\n[Who owns the next decision? When will we review it?]\n## Tasks\n- [ ] [Next action]\n## Sources\n- [Title, source, and reason to keep it]\n## Result\n[Draft, decision, or edition]\n## Visibility\n[Local, Shared, or explicitly approved for Public]\n</code></pre><p>Use the <a href=\"../../how-to-start-a-mission/1/\">Mission and Binder guide</a> to put it into practice.</p>"
+  },
+  {
+    "slug": "how-to-start-a-mission",
+    "title": "How to start a Mission and collect the work",
+    "html": "<ol><li>Open <strong>Workflow → Mission Control</strong> and enter an objective, such as <em>Plan an offline workshop</em>.</li><li>Open <strong>Tasks</strong> and record one concrete next action.</li><li>Use the shared sidebar in <strong>Binders</strong> mode to select a Binder for your brief, source notes and draft.</li><li>Open <strong>Queue</strong> to see background work and recent results.</li><li>Review the finished material and choose its audience before preparing an edition.</li></ol><p>Start with the <a href=\"../../user-template-project-binder/1/\">project Binder template</a>.</p>"
+  },
+  {
+    "slug": "udos-docs-and-specs",
+    "title": "uDOS docs and specs: starter reference",
+    "html": "<h2>Product roles</h2><p>uCore hosts the UI and services. uFlow owns workflow execution. uCode owns the BBC BASIC learning track and GridCore tools. Sonic Screwdriver covers hardware revival and deployment.</p><h2>Knowledge and publishing</h2><p>Global Knowledge is the reference baseline. Shared and Vault provide community and personal overlays. A reviewed edition is canonical on <a href=\"https://udo.guide/\">udo.guide</a> and mirrored on <a href=\"https://udo.place/\">udo.place</a>. Approved graphics use <a href=\"https://cdn.udo.guide/\">cdn.udo.guide</a>.</p><h2>Authority</h2><p>Knight publishes local editions. Sorcerer can publish to an approved cloud destination when configured. Wizard manages approved publishing origins and domains.</p><p>Read the <a href=\"../../global-knowledge-sovereign-host/1/\">sovereign host topic</a> and the <a href=\"../../ucode-manual-and-guide/1/\">uCode manual and guide</a>.</p>"
+  },
+  {
+    "slug": "ucode-manual-and-guide",
+    "title": "uCode manual and guide: first steps",
+    "html": "<p>uCode teaches programming with BBC BASIC. At the prompt, enter an unnumbered command for immediate execution:</p><pre><code>PRINT 2 + 2</code></pre><p>To store a program, enter numbered lines. Use <code>LIST</code> to inspect them and <code>RUN</code> to execute them:</p><pre><code>10 FOR I%=1 TO 3\n20 PRINT I%\n30 NEXT I%\nRUN</code></pre><h2>Learning path</h2><ol><li>First steps: output, input, variables and numbered programs.</li><li>Control flow: conditions, loops, procedures and functions.</li><li>Mode 7 and GridCore: character graphics, coordinates and layers.</li><li>Projects: capsules, interactive programs and physical computing.</li></ol><p>Source: the uCode User Guide and First Steps lesson. See <a href=\"../../udos-docs-and-specs/1/\">uDOS docs and specs</a> for the product map.</p>"
+  },
+  {
+    "slug": "starter-collection",
+    "title": "uDOS starter collection",
+    "html": "<p>Start with a reference topic, a template or a hands-on guide.</p><ul><li><a href=\"../../global-knowledge-sovereign-host/1/\">Global Knowledge: the sovereign host</a></li><li><a href=\"../../user-template-project-binder/1/\">User template: project Binder</a></li><li><a href=\"../../how-to-start-a-mission/1/\">How to start a Mission and collect the work</a></li><li><a href=\"../../udos-docs-and-specs/1/\">uDOS docs and specs: starter reference</a></li><li><a href=\"../../ucode-manual-and-guide/1/\">uCode manual and guide: first steps</a></li></ul>"
+  }
+]
