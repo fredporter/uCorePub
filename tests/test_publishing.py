@@ -72,6 +72,28 @@ class TestEditionCompiler(unittest.TestCase):
             self.assertNotIn("author: private_author", clean_text)
             self.assertIn("[SRC-1]", clean_text)
 
+    def test_compile_edition_rewrites_manifest_links(self):
+        from udos_publishing.src.compiler import compile_edition_to_static
+
+        raw_md = (
+            "# Guide\n\n"
+            "See [[Setup#Quick|Start]] and [[Secret]].\n"
+        )
+        with TemporaryDirectory(prefix="udos-manifest-compile-") as tmp_dir:
+            out_dir = Path(tmp_dir) / "output"
+            receipt = compile_edition_to_static(
+                edition_markdown=raw_md,
+                title="Guide",
+                edition_num=2,
+                output_dir=out_dir,
+                edition_manifest={"Docs/Setup.md": "https://udo.guide/setup/"},
+                known_paths=["Docs/Setup.md", "Secret.md"],
+            )
+            clean_text = (out_dir / "edition_2.clean.md").read_text()
+            self.assertIn("[Start](https://udo.guide/setup/#Quick)", clean_text)
+            self.assertIn("Secret", clean_text)
+            self.assertNotIn("[Secret](", clean_text)
+
 
 if __name__ == '__main__':
     unittest.main()

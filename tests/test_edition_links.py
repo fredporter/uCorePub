@@ -1,6 +1,6 @@
 import unittest
 
-from udos_publishing.src.edition_links import preview_wiki_links
+from udos_publishing.src.edition_links import preview_wiki_links, rewrite_wiki_links
 
 
 class EditionLinkPreviewTests(unittest.TestCase):
@@ -26,3 +26,17 @@ class EditionLinkPreviewTests(unittest.TestCase):
             source_path="Notes/Start.md",
         )
         self.assertEqual([(row["line"], row["anchor"], row["url"]) for row in preview], [(4, "Intro", "./")])
+
+    def test_rewrite_wiki_links_transforms_included_targets_and_sanitizes_unincluded(self):
+        rewritten = rewrite_wiki_links(
+            "[[Setup]] [[Guides/Setup#Install|Read this]] [[Private]] `[[Keep Code]]` ![[diagram.png]]",
+            known_paths=["Guides/Setup.md", "Old/Setup.md", "Private.md"],
+            edition_manifest={"Guides/Setup.md": "../setup/", "Assets/diagram.png": "../diagram.png"},
+        )
+        self.assertIn("Setup", rewritten)
+        self.assertIn("[Read this](../setup/#Install)", rewritten)
+        self.assertIn("Private", rewritten)
+        self.assertIn("`[[Keep Code]]`", rewritten)
+        self.assertIn("![diagram.png](../diagram.png)", rewritten)
+        self.assertNotIn("[Private](", rewritten)
+        self.assertNotIn("[Setup](", rewritten)

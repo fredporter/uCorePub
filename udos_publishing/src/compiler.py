@@ -11,7 +11,7 @@ import json
 import re
 from datetime import UTC, datetime
 from pathlib import Path
-from typing import Any, Dict, Optional
+from typing import Any, Dict, Iterable, Mapping, Optional
 
 
 def compile_edition_to_static(
@@ -19,6 +19,8 @@ def compile_edition_to_static(
     title: str,
     edition_num: int = 1,
     output_dir: Optional[Path] = None,
+    edition_manifest: Optional[Mapping[str, str]] = None,
+    known_paths: Optional[Iterable[str]] = None,
 ) -> Dict[str, Any]:
     """Compile raw edition markdown into a clean static HTML file and markdown export."""
     # 1. Strip internal comment directives (e.g. <!-- section: REQ-001 -->)
@@ -29,6 +31,15 @@ def compile_edition_to_static(
         parts = clean_md.split("---", 2)
         if len(parts) >= 3:
             clean_md = parts[2].strip()
+
+    # 3. Rewrite approved wiki links against edition manifest
+    if edition_manifest is not None:
+        from .edition_links import rewrite_wiki_links
+        clean_md = rewrite_wiki_links(
+            clean_md,
+            known_paths=known_paths or [],
+            edition_manifest=edition_manifest,
+        )
 
     sha256_hash = hashlib.sha256(clean_md.encode("utf-8")).hexdigest()
 
