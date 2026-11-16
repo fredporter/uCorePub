@@ -101,3 +101,64 @@ def compile_edition_to_static(
         receipt_file.write_text(json.dumps(receipt, indent=2), encoding="utf-8")
 
     return receipt
+
+
+def compile_reviewed_library(
+    review_manifest: Mapping[str, Any],
+    source_root: Path,
+    output_dir: Path,
+) -> Dict[str, Any]:
+    """Build a new offline library and its feeds from the same approved bytes."""
+    from .edition_feed import render_reviewed_feed, reviewed_articles, reviewed_datasets
+
+    articles = reviewed_articles(review_manifest, source_root)
+    if not articles:
+        raise ValueError("The edition has no approved public articles")
+
+    manifest = {
+        key: review_manifest[key]
+        for key in ("schema_version", "visibility", "title", "home_url", "feed_urls", "updated", "author")
+    }
+    if "description" in review_manifest:
+        manifest["description"] = review_manifest["description"]
+    manifest["items"] = []
+    files = {}
+    datasets = reviewed_datasets(review_manifest, source_root)
+    if "datasets" in review_manifest:
+        manifest["datasets"] = []
+    for record, path, payload in articles + datasets:
+        if path.parts[0] in {"feeds", "edition-manifest.json"} or any(
+            part.startswith(".") for part in path.parts
+        ):
+            raise ValueError(f"Reserved edition path: {path}")
+        files[path] = payload
+        collection = "datasets" if path.suffix == ".json" else "items"
+        manifest[collection].append({
+            key: record[key] for key in (
+                "path", "sha256", "uid", "visibility", "review_status", "title",
+                "url", "excerpt", "tags", "published", "updated",
+            ) if key in record
+        })
+    for path in files:
+        if any(parent in files for parent in path.parents):
+            raise ValueError(f"Conflicting edition path: {path}")
+
+    for wire, filename in (("rss", "rss.xml"), ("atom", "atom.xml"), ("json", "feed.json")):
+        files[Path("feeds") / filename] = render_reviewed_feed(manifest, articles, wire)
+    files[Path("edition-manifest.json")] = (
+        json.dumps(manifest, ensure_ascii=False, indent=2) + "\n"
+    ).encode("utf-8")
+
+    output = Path(output_dir)
+    output.mkdir()
+    try:
+        for path, payload in files.items():
+            target = output / path
+            target.parent.mkdir(parents=True, exist_ok=True)
+            target.write_bytes(payload)
+    except OSError:
+        from shutil import rmtree
+
+        rmtree(output)
+        raise
+    return manifest
