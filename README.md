@@ -10,8 +10,8 @@ This repository owns clean edition static compilation, offline vault export, and
 
 - **Clean Edition Compiler:** Compiles vaults and notebook binders into sanitized, publication-ready editions. Strips internal tags, local filesystem paths, and private author frontmatter while preserving citations and evidence chains.
 - **Static Export Engines:** Exports clean editions to Quartz, Jekyll, and portable Markdown libraries for offline distribution.
-- **Headless WordPress Commercial Cloud Arm:** Outbound publishing adapter pushing clean editions to hosted WordPress / WordPress Multisite environments via the WordPress REST API (creating posts, pages, categories, tags, and media attachments).
-- **Sovereign Mirror Contracts:** Guide and place mirror boundaries for `udo.guide` and `udo.place`.
+- **Headless WordPress Commercial Cloud Arm:** Opt-in Python adapter that sends reviewed posts to a selected HTTPS WordPress site and checks the returned post ID and status. Callers select existing categories and tags by ID.
+- **Sovereign Mirror Contracts:** `udo.guide` is the canonical edition host. `udo.place` mirrors the same approved editions and adds a spatial index. Both use the same edition identity and approved link manifest. Graphics are served from `cdn.udo.guide`.
 - **Privacy & Expiry Semantics:** Enforces public vs shared vs private access controls and expiration dates before any document leaves the local environment.
 
 ## Repository Structure
@@ -42,7 +42,8 @@ python3 -m unittest discover
 
 ## Notes
 
-- This repo is intentionally scaffold-first for the current phase; deeper production behavior is tracked in the next execution plan.
+- Pass `enabled=True` to `WordPressCloudAdapter` with a selected HTTPS site URL and an application password obtained through the caller's credential store. Multisite callers use the target site's full URL. The default post status is draft.
+- The adapter is a library entry point. uCore role checks, destination review, and live staging qualification are needed before exposing it in a runtime publishing surface. If delivery is unconfirmed, check the destination before retrying.
 
 ## License
 

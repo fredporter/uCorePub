@@ -8,7 +8,7 @@ from typing import Any, Dict, Tuple
 
 @dataclass(frozen=True)
 class PublishingMirrorContract:
-    """Canonical guide/place mirror contract for publishing targets."""
+    """Canonical guide origin, place edition mirror, and graphics origin."""
 
     guide_name: str = "udo.guide"
     place_name: str = "udo.place"
@@ -17,6 +17,8 @@ class PublishingMirrorContract:
     location_keys: Tuple[str, ...] = ("location", "region", "site")
     beacon_keys: Tuple[str, ...] = ("beacons", "signals")
     portal_keys: Tuple[str, ...] = ("portals", "targets")
+
+    asset_name: str = "cdn.udo.guide"
 
     def as_dict(self) -> Dict[str, Any]:
         """Return a JSON-friendly representation of the contract."""
